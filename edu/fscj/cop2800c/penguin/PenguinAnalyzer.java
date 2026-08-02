@@ -1,6 +1,6 @@
 // PenguinAnalyzer.java
-// D. Singletary
-// 3/14/25
+// Dan Rojas
+// 8/2/2026
 // Handles file reading, processing, and writing of penguin data
 
 package edu.fscj.cop2800c.penguin;
@@ -85,14 +85,17 @@ public class PenguinAnalyzer {
                             tokens[6].trim();
     
                         // Ensure constructor order matches attribute order
-                        Penguin penguin = new Penguin(sampleNumber, species, 
+                     Penguin penguin = new Penguin(sampleNumber, species, 
                                 culmenLength, culmenDepth, 
                                 bodyMass, sex, flipperLength);
                         penguinList.add(penguin);
                         count++; // Increment count after adding a penguin
                     } catch (NumberFormatException e) {
                         System.err.println("Skipping invalid row: " + line);
+                    } catch (InvalidBirdDataException e) {
+                        System.out.println(e);
                     }
+                     
                 } else {
                     System.err.println("Skipping malformed row: " + line);
                 }
@@ -100,7 +103,7 @@ public class PenguinAnalyzer {
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
-    
+ 
         return count; // Return the total number of penguins read
     }
 
